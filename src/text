@@ -1,0 +1,344 @@
+..............................
+
+<!-- import React, { useState, useEffect } from "react";
+import logo from "../assets/logo-icon.png";
+import { Link } from "react-router-dom";
+import {
+  IoHomeOutline,
+  IoDiamondOutline,
+  IoChatbubblesOutline,
+} from "react-icons/io5";
+import { MdAnimation, MdOutlineCurrencyExchange } from "react-icons/md";
+import { PiPackageBold, PiHandWithdraw } from "react-icons/pi";
+import { HiOutlineUserGroup } from "react-icons/hi2";
+import { RiVipCrownLine, RiVipLine, RiContactsLine } from "react-icons/ri";
+import { CiGift } from "react-icons/ci";
+import { TbHomeMove } from "react-icons/tb";
+import { LuBadgePercent } from "react-icons/lu";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
+import { FaCircleUser } from "react-icons/fa6";
+import { SlMenu } from "react-icons/sl";
+
+export default function Navbar() {
+  const [open, setOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const toggleMenu = () => {
+    setOpen(!open);
+  };
+
+  // Auto collapse on mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+        setOpen(false);
+      } else {
+        setIsMobile(false);
+        setOpen(true);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <div className="flex min-h-screen bg-gray-100 overflow-hidden">
+      <aside
+        className={`fixed top-0 left-0   h-full bg-[#2a2185] text-white z-50 transition-all duration-300 
+        ${open ? "w-[300px]" : "w-20"} 
+        ${isMobile ? (open ? "translate-x-0" : "-translate-x-full") : ""}`}
+      >
+        {/* Logo Area */}
+        <div className="flex items-center gap-2 padding5 border-b border-white/10">
+          <img src={logo} alt="Logo" className="w-[30px]" />
+          {open && (
+            <h1 className="text-[15px] font-semibold">Admin Dashboard</h1>
+          )}
+        </div>
+
+        {/* Sidebar Menu */}
+        <ul className="flex flex-col mll mt-2">
+          <SidebarItem
+            to="/dashboard"
+            icon={<IoHomeOutline />}
+            label="Dashboard"
+            open={open}
+          />
+          <SidebarItem
+            to="/user"
+            icon={<HiOutlineUserGroup />}
+            label="Users"
+            open={open}
+          />
+          <SidebarItem
+            to="/viiip"
+            icon={<RiVipCrownLine />}
+            label="VVIP Package"
+            open={open}
+          />
+          <SidebarItem
+            to="/vip"
+            icon={<RiVipLine />}
+            label="VIP Package"
+            open={open}
+          />
+          <SidebarItem
+            to="/diamond"
+            icon={<IoDiamondOutline />}
+            label="Diamond"
+            open={open}
+          />
+          <SidebarItem to="/gift" icon={<CiGift />} label="Gift" open={open} />
+          <SidebarItem
+            to="/agency"
+            icon={<TbHomeMove />}
+            label="Agency"
+            open={open}
+          />
+          <SidebarItem
+            to="/moderator"
+            icon={<RiContactsLine />}
+            label="Moderator"
+            open={open}
+          />
+          <SidebarItem
+            to="/percentage"
+            icon={<LuBadgePercent />}
+            label="Percentage"
+            open={open}
+          />
+          <SidebarItem
+            to="/exchange"
+            icon={<MdOutlineCurrencyExchange />}
+            label="Exchange Rate"
+            open={open}
+          />
+          <SidebarItem
+            to="/animation"
+            icon={<MdAnimation />}
+            label="Animation"
+            open={open}
+          />
+          <SidebarItem
+            to="/room"
+            icon={<MdAnimation />}
+            label="Room Image"
+            open={open}
+          />
+          <SidebarItem
+            to="/bannarimage"
+            icon={<MdAnimation />}
+            label="Banner Image"
+            open={open}
+          />
+          <SidebarItem
+            to="/packagephar"
+            icon={<PiPackageBold />}
+            label="Package Purchase"
+            open={open}
+          />
+          <SidebarItem
+            to="/withdrew"
+            icon={<PiHandWithdraw />}
+            label="Withdraw Requests"
+            open={open}
+          />
+          <SidebarItem
+            to="/userchat"
+            icon={<IoChatbubblesOutline />}
+            label="User Chat"
+            open={open}
+          />
+          <SidebarItem
+            to="/notification"
+            icon={<IoIosNotificationsOutline />}
+            label="Notification"
+            open={open}
+          />
+        </ul>
+      </aside>
+
+      {/* =====(MOBILE) ===== */}
+      {isMobile && open && (
+        <div
+          onClick={toggleMenu}
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+        ></div>
+      )}
+
+      {/* ===== MAIN CONTENT ===== */}
+      <main
+        className={`flex-1 flex flex-col transition-all duration-300 paddingL  ${
+          isMobile ? "ml-0" : open ? "marginLeft" : "marginLeftY"
+        }`}
+      >
+        {/* Top Navbar */}
+        <header className="flex justify-between items-center h-[60px]   ">
+          <SlMenu
+            onClick={toggleMenu}
+            className="cursor-pointer text-2xl text-[#2a2185]"
+          />
+
+          <div className="relative hidden  sm:block  items-center">
+            <CiSearch className="absolute left-3 top-2 text-gray-500 mtt" />
+            <input
+              type="search"
+              placeholder="Search here"
+              className="border border-gray-300 outline-none paddingL w-[300px] text-[15px] rounded-[10px] "
+            />
+          </div>
+
+          <FaCircleUser className="w-[35px] h-[35px] text-[#2a2185]" />
+        </header>
+
+        {/* Dashboard Body */}
+        <section className="padding3">
+          {/* Demo Dashboard Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            <DashboardCard
+              title="Total percentage"
+              cardTitle="Today"
+              value="1,245"
+              color="bg-white"
+            />
+            <DashboardCard
+              title="Total percentage"
+              cardTitle="Alltime"
+              value="1362647"
+              color="bg-white"
+            />
+            <DashboardCard
+              title="Total send"
+              cardTitle="Today"
+              value="0"
+              color="bg-white"
+            />
+            <DashboardCard
+              title="Total send"
+              cardTitle="Alltime"
+              value="7902341"
+              color="bg-white"
+            />
+            <DashboardCard
+              title="Total Receive"
+              value="0"
+              cardTitle="Today"
+              color="bg-white"
+            />
+            <DashboardCard
+              title="Total Receive"
+              cardTitle="Alltime"
+              value="1682435"
+              color="bg-white"
+            />
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+/* ===== Sidebar Item ===== */
+function SidebarItem({ to, icon, label, open }) {
+  return (
+    <li>
+      <Link
+        to={to}
+        className={`flex items-center gap-4 py-2.5 p-3  rounded-md hover:bg-white hover:text-[#2a2185] transition-all ${
+          open ? "justify-start" : "justify-center"
+        }`}
+      >
+        <span className="text-[20px]">{icon}</span>
+        {open && <span className="text-[15px]">{label}</span>}
+      </Link>
+    </li>
+  );
+}
+
+/* ===== Dashboard Card Component ===== */
+function DashboardCard({ title, value, color, cardTitle }) {
+  return (
+    <div
+      className={`p-3.5 text-[#2a2185] rounded-xl shadow-sm ${color} hover:bg-[#2a2185] hover:text-white transition duration-300`}
+    >
+      <div className="flex items-center justify-between">
+        <h2 className="text-[18px] font-medium">{title}</h2>
+        <h4 className="text-[15px] font-medium">{cardTitle}</h4>
+      </div>
+      <p className="text-3xl font-bold mt-2">{value}</p>
+    </div>
+  );
+} -->
+
+<!-- import UserData from "./User/UserData";
+
+export default function Dashboard() {
+  const rows = [
+    {
+      id: 100100,
+      name: "Asiful Islam",
+      diamond: 64000,
+      accountType: "REGULAR",
+      userType: "USER",
+      img: "",
+    },
+    {
+      id: 100101,
+      name: "Sp-Live",
+      diamond: 3702690,
+      accountType: "REGULAR",
+      userType: "USER",
+      img: "",
+    },
+    {
+      id: 100102,
+      name: "Olivia Hyde",
+      diamond: 398113,
+      accountType: "REGULAR",
+      userType: "VIP",
+      img: "",
+    },
+    {
+      id: 100103,
+      name: "Foreign IT",
+      diamond: 0,
+      accountType: "REGULAR",
+      userType: "USER",
+      img: "",
+    },
+    {
+      id: 100107,
+      name: "Samira Islam",
+      diamond: 11260100,
+      accountType: "REGULAR",
+      userType: "USER",
+      img: "",
+    },
+    {
+      id: 100112,
+      name: "Asiful Lesan islam gg",
+      diamond: 4988190,
+      accountType: "REGULAR",
+      userType: "VVIP",
+      img: "",
+    },
+    {
+      id: 100113,
+      name: "Tripti",
+      diamond: 16500,
+      accountType: "REGULAR",
+      userType: "USER",
+      img: "",
+    },
+  ];
+  return (
+    <>
+      <div>
+        <input type="text" />
+      </div>
+    </>
+  );
+} -->
