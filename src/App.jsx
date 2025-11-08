@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -20,7 +19,6 @@ import PackagePherchese from "./components/PackagePherchase";
 import Withdrewreq from "./components/Withdrewreq";
 import UserChat from "./components/UserChat";
 import Notification from "./components/Notification";
-import Main from "./components/main";
 
 function App() {
   return (
